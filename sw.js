@@ -1,14 +1,13 @@
-const CACHE_NAME = 'zennotes-v1';
+const CACHE_NAME = 'zennotes-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './style.css',
     './script.js',
     './manifest.json',
-    './favicon.ico',
     './icons/icon-192.png',
     './icons/icon-512.png',
-    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap'
+    'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap'
 ];
 
 // Install Event
