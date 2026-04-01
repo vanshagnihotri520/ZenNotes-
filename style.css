@@ -304,40 +304,155 @@ h1, h2, h3 {
     box-shadow: 0 20px 45px rgba(0, 242, 254, 0.6);
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* Modal Overhaul */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
 .modal-content {
-    background: rgba(10, 10, 20, 0.9);
+    background: rgba(15, 15, 25, 0.95);
     backdrop-filter: blur(40px);
     border: 1px solid var(--glass-border);
-    max-width: 700px;
-    padding: 40px;
-    border-radius: 20px;
+    width: 90%;
+    max-width: 650px;
+    padding: 35px;
+    border-radius: 24px;
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.9) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 #noteTitle {
-    background: none;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s ease;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    outline: none;
+    transition: all 0.3s ease;
 }
 
 #noteTitle:focus {
-    border-bottom-color: var(--aurora-cyan);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--aurora-cyan);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--aurora-pink);
+}
+
+#noteText {
+    width: 100%;
+    min-height: 250px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+    outline: none;
+    resize: none;
+    transition: all 0.3s ease;
+}
+
+#noteText:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--aurora-teal);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.color-picker {
+    display: flex;
+    gap: 12px;
+}
+
+.color-opt {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.color-opt.active {
+    border-color: var(--white);
+    transform: scale(1.2);
 }
 
 .save-btn {
     background: var(--primary-gradient);
-    padding: 14px 30px;
-    border-radius: 30px;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4);
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .sidebar { width: 300px; }
-    .main-content { padding: 25px; margin-left: 0; }
-    .app-header h1 { font-size: 1.5rem; }
-    .search-container { width: 220px; }
+    .sidebar { width: 100%; transform: translateX(-100%); transition: transform 0.4s ease; }
+    .sidebar.active { transform: translateX(0); }
+    .main-content { padding: 20px; margin-left: 0; }
+    .app-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .search-container { width: 100%; }
+    .modal-content { width: 95%; padding: 25px; }
 }
